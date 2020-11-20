@@ -1,18 +1,14 @@
 dist: focal
 language:
     - python
+python:
+    - "3.7"
+    - "3.8"
 services:
   - docker
-install: pip install codecov
+install: pip install tox-travis codecov
 script: 
-    - bash ci/scripts/basic_stage.sh lint_code
-    - bash ci/scripts/basic_stage.sh lint_docs
-    - bash ci/scripts/basic_stage.sh types
-    - bash ci/scripts/basic_stage.sh readme
-    - bash ci/scripts/basic_stage.sh doctests
-    - bash ci/scripts/unit.sh
-    - bash ci/scripts/basic_stage.sh property
-    - bash ci/scripts/docs.sh
+    - tox
 after_success:
     - codecov
 deploy:
