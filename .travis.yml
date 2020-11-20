@@ -4,8 +4,6 @@ language:
 python:
     - "3.7"
     - "3.8"
-services:
-  - docker
 install: pip install tox-travis codecov
 script: 
     - tox
