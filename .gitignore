@@ -9,3 +9,5 @@ dist/
 docs/build/
 docs/source/gallery/
 htmlcov/
+
+!.github/
