@@ -11,10 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+      - name: Run Docker test stages
+        run: bash ci/scripts/run_stages.sh ${{ matrix.python-version }}
