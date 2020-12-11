@@ -21,13 +21,18 @@ jobs:
             "docs",
           ]
 
+    env:
+      PYTHON_VERSION: ${{ matrix.python-version }}
+      STAGE: ${{ matrix.stage }}
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python $PYTHON_VERSION
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: $PYTHON_VERSION
 
       - name: Run test stage
-        run: bash ci/scripts/run_stage.sh ${{ matrix.stage }} ${{ matrix.python-version }}
+        run: bash ci/scripts/run_stage.sh $STAGE $PYTHON_VERSION
+
