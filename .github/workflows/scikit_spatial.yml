@@ -36,3 +36,10 @@ jobs:
       - name: Run test stage
         run: bash ci/scripts/run_stage.sh $STAGE $PYTHON_VERSION
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml
+          env_vars: PYTHON
+          fail_ci_if_error: true
+          verbose: true
