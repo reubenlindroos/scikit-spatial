@@ -11,14 +11,14 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9]
         stage:
           [
-            "lint_code",
-            "lint_docs",
-            "types",
-            "readme",
-            "doctests",
-            "unit",
-            "property",
-            "docs",
+            'lint_code',
+            'lint_docs',
+            'types',
+            'readme',
+            'doctests',
+            'unit',
+            'property',
+            'docs',
           ]
 
     steps:
@@ -33,10 +33,11 @@ jobs:
         run: bash ci/scripts/run_stage.sh ${{ matrix.stage }} ${{ matrix.python-version }}
 
       - name: Upload coverage to Codecov
-        if: ${{ matrix.stage }} == 'unit'
-        uses: codecov/codecov-action@v1
         env:
+          STAGE: ${{ matrix.stage }}
           PYTHON_VERSION: ${{ matrix.python-version }}
+        if: $STAGE == 'unit'
+        uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
           env_vars: PYTHON_VERSION
