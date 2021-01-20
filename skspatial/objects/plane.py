@@ -82,6 +82,7 @@ class Plane(_BaseLinePlane):
 
         super().__init__(point, normal)
         self.normal = self.vector
+        self.error = None
 
     @classmethod
     def from_vectors(cls, point: array_like, vector_a: array_like, vector_b: array_like) -> 'Plane':
@@ -605,7 +606,8 @@ class Plane(_BaseLinePlane):
 
         points_centered, centroid = points.mean_center(return_centroid=True)
 
-        u, _, _ = np.linalg.svd(points_centered.T, **kwargs)
+        u, sigma, _ = np.linalg.svd(points_centered.T, **kwargs)
+        cls.error = min(sigma)
         normal = Vector(u[:, -1])
 
         return cls(centroid, normal)
