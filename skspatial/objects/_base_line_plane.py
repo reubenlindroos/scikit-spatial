@@ -17,10 +17,11 @@ from skspatial.typing import array_like
 class _BaseLinePlane:
     """Private parent class for Line and Plane."""
 
-    def __init__(self, point: array_like, vector: array_like):
+    def __init__(self, point: array_like, vector: array_like, error = None):
 
         self.point = Point(point)
         self.vector = Vector(vector)
+        self.error = error
 
         if self.point.dimension != self.vector.dimension:
             raise ValueError("The point and vector must have the same dimension.")
